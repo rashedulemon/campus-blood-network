@@ -11,7 +11,7 @@ export default function LandingPage() {
 
   const donorCount = users ? users.length : 0;
   const activeDonorsCount = users ? users.filter(u => u.available).length : 0;
-  const requestsCount = requests ? requests.length : 0;
+  const requestsCount = requests ? requests.filter(r => r.status === 'active').length : 0;
 
   const stats = [
     { label: "Registered Donors", value: donorCount.toString(), icon: <Users className="text-primary" /> },

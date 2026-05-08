@@ -25,16 +25,15 @@ export default function EmergencyPage() {
   const today = new Date();
   today.setHours(0, 0, 0, 0);
 
-  // Filter out expired requests, then sort: active first, then by creation date descending
+  // Filter out expired requests AND fulfilled requests, then sort by creation date descending
   const sortedRequests = requests
     .filter(req => {
+      if (req.status !== 'active') return false; // Hide fulfilled requests
       if (!req.requiredDate) return true;
       const reqDate = new Date(req.requiredDate);
       return reqDate >= today;
     })
     .sort((a, b) => {
-      if (a.status === 'active' && b.status !== 'active') return -1;
-      if (a.status !== 'active' && b.status === 'active') return 1;
       return new Date(b.createdAt) - new Date(a.createdAt);
     });
 
