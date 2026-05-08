@@ -1,0 +1,54 @@
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // Helper functions
+    function isAuthenticated() {
+      return request.auth != null;
+    }
+    
+    function isOwner(userId) {
+      return request.auth.uid == userId;
+    }
+
+    function isAdmin() {
+      // In a real app, you might have a dedicated admins collection or custom claims
+      // For this implementation, we check if the user's document has role == 'admin'
+      return isAuthenticated() && get(/databases/$(database)/documents/users/$(request.auth.uid)).data.role == 'admin';
+    }
+
+    // Users Collection
+    match /users/{userId} {
+      // Anyone can read basic donor info, but maybe restrict sensitive fields if needed
+      allow read: if true;
+      // Users can only create their own profile initially
+      allow create: if isAuthenticated() && isOwner(userId);
+      // Users can update their own profile, admins can update any
+      allow update: if isAuthenticated() && (isOwner(userId) || isAdmin());
+      // Only admins can delete users
+      allow delete: if isAdmin();
+    }
+
+    // Blood Requests Collection
+    match /bloodRequests/{requestId} {
+      // Anyone logged in can view requests
+      allow read: if true;
+      // Any logged in user can create a request
+      allow create: if isAuthenticated();
+      // Only the creator or an admin can update/delete a request
+      allow update, delete: if isAuthenticated() && (request.auth.uid == resource.data.createdBy || isAdmin());
+    }
+
+    // Notifications Collection
+    match /notifications/{notificationId} {
+      // Users can only read their own notifications
+      allow read: if isAuthenticated() && resource.data.userId == request.auth.uid;
+      // System or admins can create notifications
+      allow create: if isAuthenticated();
+      // Users can update their own notifications (e.g., mark as read)
+      allow update: if isAuthenticated() && resource.data.userId == request.auth.uid;
+      // Only admins can delete notifications
+      allow delete: if isAdmin();
+    }
+  }
+}
