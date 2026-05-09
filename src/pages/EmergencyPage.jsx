@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
 import { useCollection, useFirestore } from '../hooks/useFirestore';
 import { useAuth } from '../context/AuthContext';
 import RequestCard from '../components/emergency/RequestCard';
@@ -96,7 +97,7 @@ export default function EmergencyPage() {
                       <AlertCircle className="text-red-500 w-12 h-12 mx-auto mb-4" />
                       <h3 className="text-lg font-bold text-slate-900 mb-2">Login Required</h3>
                       <p className="text-slate-600 text-sm mb-4">You must be registered and logged in to post an emergency blood request.</p>
-                      <a href="/login" className="block w-full py-2 bg-primary text-white rounded-lg font-medium">Login Now</a>
+                      <Link to="/login" className="block w-full py-2 bg-primary hover:bg-primary-dark transition-colors text-white rounded-lg font-medium text-center">Login Now</Link>
                     </div>
                   </div>
                 )}

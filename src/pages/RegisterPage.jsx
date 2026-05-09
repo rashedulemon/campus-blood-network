@@ -257,7 +257,7 @@ export default function RegisterPage() {
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
               <div className="md:col-span-2">
-                <label className="block text-sm font-medium text-slate-700 mb-1">University Email *</label>
+                <label className="block text-sm font-medium text-slate-700 mb-1">Email *</label>
                 <input
                   type="email"
                   name="email"
@@ -265,7 +265,7 @@ export default function RegisterPage() {
                   value={formData.email}
                   onChange={handleChange}
                   className="w-full px-4 py-2.5 rounded-xl border border-slate-200 focus:ring-primary focus:border-primary bg-slate-50 text-sm"
-                  placeholder="student@university.edu"
+                  placeholder="name@email.com"
                 />
               </div>
 
