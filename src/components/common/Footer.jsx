@@ -1,8 +1,10 @@
 import { Droplet, Heart, Globe } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import { useAuth } from '../../context/AuthContext';
 
 export default function Footer() {
   const currentYear = new Date().getFullYear();
+  const { currentUser } = useAuth();
 
   return (
     <footer className="bg-slate-900 text-slate-300 py-12 border-t border-slate-800">
@@ -33,7 +35,9 @@ export default function Footer() {
               <li><Link to="/search" className="hover:text-primary transition-colors">Find Blood</Link></li>
               <li><Link to="/emergency" className="hover:text-primary transition-colors">Emergency Requests</Link></li>
               <li><Link to="/about" className="hover:text-primary transition-colors">About Us</Link></li>
-              <li><Link to="/register" className="hover:text-primary transition-colors">Register as Donor</Link></li>
+              {!currentUser && (
+                <li><Link to="/register" className="hover:text-primary transition-colors">Register as Donor</Link></li>
+              )}
             </ul>
           </div>
 
