@@ -69,8 +69,8 @@ export default function RegisterPage() {
   };
 
   const departments = [
-    "Electrical and Electronic Engineering", "Computer Science and Engineering", "Business Administration", 
-    "Economics", "English", "Islamic History and Culture", "Journalism, Communication and Media Studies", "Law and Human Rights", "Nutrition and Food Engineering",
+    "EEE", "CSE", "BBA", 
+    "Economics", "English", "Islamic HC", "JCM", "Law & HR", "NFE",
     "Pharmacy", "Political Science", "Public Health", "Sociology"
   ];
 

@@ -10,6 +10,9 @@ import EmergencyPage from '../pages/EmergencyPage';
 import Dashboard from '../pages/Dashboard';
 import AdminDashboard from '../pages/AdminDashboard';
 import AboutPage from '../pages/AboutPage';
+import HelpCenter from '../pages/HelpCenter';
+import PrivacyPolicy from '../pages/PrivacyPolicy';
+import TermsOfService from '../pages/TermsOfService';
 
 export default function AppRoutes() {
   return (
@@ -21,6 +24,9 @@ export default function AppRoutes() {
       <Route path="/search" element={<SearchPage />} />
       <Route path="/emergency" element={<EmergencyPage />} />
       <Route path="/about" element={<AboutPage />} />
+      <Route path="/help" element={<HelpCenter />} />
+      <Route path="/privacy" element={<PrivacyPolicy />} />
+      <Route path="/terms" element={<TermsOfService />} />
 
       {/* Protected Routes */}
       <Route 
