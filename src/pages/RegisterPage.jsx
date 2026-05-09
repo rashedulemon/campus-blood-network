@@ -133,7 +133,7 @@ export default function RegisterPage() {
                   value={formData.fullName}
                   onChange={handleChange}
                   className="w-full px-4 py-2.5 rounded-xl border border-slate-200 focus:ring-primary focus:border-primary bg-slate-50 text-sm"
-                  placeholder="John Doe"
+                  placeholder="Your Full Name"
                 />
               </div>
               

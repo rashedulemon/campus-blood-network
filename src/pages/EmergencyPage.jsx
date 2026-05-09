@@ -137,7 +137,7 @@ export default function EmergencyPage() {
                       value={formData.hospital}
                       onChange={(e) => setFormData({...formData, hospital: e.target.value})}
                       className="w-full px-4 py-2 border border-slate-200 rounded-xl focus:ring-red-500 focus:border-red-500 bg-slate-50"
-                      placeholder="e.g. Dhaka Medical College Hospital"
+                      placeholder="e.g. Rajshahi Medical College Hospital"
                     />
                   </div>
                   <div>

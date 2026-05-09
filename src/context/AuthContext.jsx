@@ -5,7 +5,8 @@ import {
   createUserWithEmailAndPassword, 
   signInWithEmailAndPassword, 
   signOut,
-  updateProfile
+  updateProfile,
+  sendPasswordResetEmail
 } from 'firebase/auth';
 import { doc, setDoc, onSnapshot } from 'firebase/firestore';
 import { auth, db } from '../firebase/config';
@@ -57,6 +58,11 @@ export function AuthProvider({ children }) {
     return signOut(auth);
   }
 
+  // Reset Password
+  function resetPassword(email) {
+    return sendPasswordResetEmail(auth, email);
+  }
+
   // Listen to auth state changes
   useEffect(() => {
     let unsubscribeDoc = null;
@@ -98,6 +104,7 @@ export function AuthProvider({ children }) {
     register,
     login,
     logout,
+    resetPassword,
     isAdmin: userData?.role === 'admin'
   };
 

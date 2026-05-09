@@ -10,7 +10,7 @@ export default function LoginPage() {
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
-  const { login } = useAuth();
+  const { login, resetPassword } = useAuth();
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
@@ -26,6 +26,24 @@ export default function LoginPage() {
     } catch (err) {
       console.error(err);
       setError('Failed to log in. Please check your credentials.');
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleResetPassword = async () => {
+    if (!email) {
+      setError('Please enter your email address first to reset your password.');
+      return;
+    }
+    try {
+      setError('');
+      setLoading(true);
+      await resetPassword(email);
+      alert('Password reset email sent! Please check your inbox.');
+    } catch (err) {
+      console.error(err);
+      setError('Failed to send reset email. Make sure your email is correct.');
     } finally {
       setLoading(false);
     }
@@ -126,9 +144,13 @@ export default function LoginPage() {
 
             <div className="flex items-center justify-end">
               <div className="text-sm">
-                <a href="#" className="font-medium text-primary hover:text-primary-light">
+                <button 
+                  type="button" 
+                  onClick={handleResetPassword}
+                  className="font-medium text-primary hover:text-primary-light"
+                >
                   Forgot your password?
-                </a>
+                </button>
               </div>
             </div>
 
