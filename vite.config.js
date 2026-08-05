@@ -5,7 +5,7 @@ import { fileURLToPath, URL } from 'url'
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  base: '/campus-blood-network/', // Required for GitHub Pages deployment
+  base: '/', // Required for GitHub Pages deployment
   build: {
     target: 'es2015', // Ensures older mobile browsers can run the JavaScript
   },
